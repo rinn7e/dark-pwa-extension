@@ -142,7 +142,14 @@ export const handleToggleDarkEnabled = (model: Model): [Model, Cmd<Msg>] => {
   if (model.isSystemPage) return [model, Cmd.none()]
   const nextModel = { ...model, darkEnabled: !model.darkEnabled }
   const cmd = Task.attempt(
-    Task.fromPromise(() => saveSettingsPromise(model.hostname, nextModel)),
+    Task.fromPromise(() =>
+      saveSettingsPromise(model.hostname, {
+        darkEnabled: nextModel.darkEnabled,
+        darkColor: nextModel.darkColor,
+        lightEnabled: nextModel.lightEnabled,
+        lightColor: nextModel.lightColor,
+      }),
+    ),
     (): Msg => ({ type: 'NoOp' }),
   )
   return [nextModel, cmd]
@@ -155,7 +162,14 @@ export const handleSetDarkColor = (
   if (model.isSystemPage) return [model, Cmd.none()]
   const nextModel = { ...model, darkColor: color }
   const cmd = Task.attempt(
-    Task.fromPromise(() => saveSettingsPromise(model.hostname, nextModel)),
+    Task.fromPromise(() =>
+      saveSettingsPromise(model.hostname, {
+        darkEnabled: nextModel.darkEnabled,
+        darkColor: nextModel.darkColor,
+        lightEnabled: nextModel.lightEnabled,
+        lightColor: nextModel.lightColor,
+      }),
+    ),
     (): Msg => ({ type: 'NoOp' }),
   )
   return [nextModel, cmd]
@@ -165,7 +179,14 @@ export const handleToggleLightEnabled = (model: Model): [Model, Cmd<Msg>] => {
   if (model.isSystemPage) return [model, Cmd.none()]
   const nextModel = { ...model, lightEnabled: !model.lightEnabled }
   const cmd = Task.attempt(
-    Task.fromPromise(() => saveSettingsPromise(model.hostname, nextModel)),
+    Task.fromPromise(() =>
+      saveSettingsPromise(model.hostname, {
+        darkEnabled: nextModel.darkEnabled,
+        darkColor: nextModel.darkColor,
+        lightEnabled: nextModel.lightEnabled,
+        lightColor: nextModel.lightColor,
+      }),
+    ),
     (): Msg => ({ type: 'NoOp' }),
   )
   return [nextModel, cmd]
@@ -178,7 +199,14 @@ export const handleSetLightColor = (
   if (model.isSystemPage) return [model, Cmd.none()]
   const nextModel = { ...model, lightColor: color }
   const cmd = Task.attempt(
-    Task.fromPromise(() => saveSettingsPromise(model.hostname, nextModel)),
+    Task.fromPromise(() =>
+      saveSettingsPromise(model.hostname, {
+        darkEnabled: nextModel.darkEnabled,
+        darkColor: nextModel.darkColor,
+        lightEnabled: nextModel.lightEnabled,
+        lightColor: nextModel.lightColor,
+      }),
+    ),
     (): Msg => ({ type: 'NoOp' }),
   )
   return [nextModel, cmd]
